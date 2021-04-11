@@ -1,0 +1,9 @@
+.places__card {
+  display: flex;
+  border-radius: 10px;
+  background-color: white;
+  flex-wrap: wrap;
+  align-items: baseline;
+  max-height: 361px;
+
+}
