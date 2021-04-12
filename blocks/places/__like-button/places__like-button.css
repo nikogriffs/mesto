@@ -2,7 +2,7 @@
     border: none;
     padding: 0;
     margin: 0 20px 0 0;
-    background-image: url(/images/like.svg);
+    background-image: url(../../../images/like.svg);
     background-color: #fff;
     width: 22px;
     height: 19px;
@@ -16,5 +16,5 @@
 }
 
 .places__like-button:active {
-    background-image: url(/images/like_active.svg);
+    background-image: url(../../../images/like_active.svg);
 }

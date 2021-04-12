@@ -1,5 +1,5 @@
 .profile__edit-button {
-    background-image: url(/images/Edit_Button.svg);
+    background-image: url(../../../images/Edit_Button.svg);
     min-height: 24px;
     min-width: 24px;
     background-color: #000;

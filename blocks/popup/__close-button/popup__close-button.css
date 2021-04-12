@@ -2,7 +2,7 @@
     position: relative;
     left: 430px;
     bottom: 330px;
-    background-image: url(/images/Close_Icon.svg);
+    background-image: url(../../../images/Close_Icon.svg);
     background-position: center;
     width: 40px;
     height: 40px;
