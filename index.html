@@ -2,108 +2,92 @@
 <html lang="ru">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/pages/index.css">
-  <title>Место</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/pages/index.css">
+    <title>Место</title>
 </head>
 
 <body class="page">
-  <header class="header">
-    <img src="/images/logo.png" alt="Логотип сайта Место" class="header__logo">
-  </header>
+    <header class="header">
+        <img src="/images/logo.png" alt="Логотип сайта Место" class="header__logo">
+    </header>
 
-  <main>
-    <section class="profile">
+    <main>
+        <section class="profile">
+            <div class="profile__card">
+                <img src="/images/avatar.png" alt="Фотография профиля" class="profile__avatar">
+                <div class="profile__info">
+                    <div class="profile__edit">
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <button type="button" class="profile__edit-button"></button>
+                    </div>
+                    <p class="profile__job">Исследователь океана</p>
+                </div>
+            </div>
+            <button type="button" class="profile__add-button"></button>
+        </section>
 
-      <div class="profile__card">
+        <section class="places">
+            <ul class="places__list">
+                <li class="places__card">
+                    <img src="/images/karachaevsk.png" alt="Фотография старого монастыря недалеко от Карачаевска" class="places__image">
+                    <h2 class="places__title">Карачаевск</h2>
+                    <button type="button" class="places__like-button"></button>
+                </li>
 
-        <img src="/images/avatar.png" alt="Фотография профиля" class="profile__avatar">
-        <div class="profile__info">
+                <li class="places__card">
+                    <img src="/images/elbrus.png" alt="Фотография горизонта с горой Эльбрус" class="places__image">
+                    <h2 class="places__title">Гора Эльбрус</h2>
+                    <button type="button" class="places__like-button"></button>
+                </li>
 
-          <div class="profile__edit">
+                <li class="places__card">
+                    <img src="/images/dombai.png" alt="Пейзаж горного хребта Домбай вдалеке" class="places__image">
+                    <h2 class="places__title">Домбай</h2>
+                    <button type="button" class="places__like-button"></button>
+                </li>
 
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button type="button" class="profile__edit-button"></button>
+                <li class="places__card">
+                    <img src="/images/elbrus.png" alt="" class="places__image">
+                    <h2 class="places__title">Гора Эльбрус</h2>
+                    <button type="button" class="places__like-button"></button>
+                </li>
 
-          </div>
-          <p class="profile__job">Исследователь океана</p>
+                <li class="places__card">
+                    <img src="/images/dombai.png" alt="Пейзаж горного хребта Домбай вдалеке" class="places__image">
+                    <h2 class="places__title">Домбай</h2>
+                    <button type="button" class="places__like-button"></button>
+                </li>
 
+                <li class="places__card">
+                    <img src="/images/karachaevsk.png" alt="Фотография старого монастыря недалеко от Карачаевска" class="places__image">
+                    <h2 class="places__title">Карачаево-Черкесия</h2>
+                    <button type="button" class="places__like-button"></button>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p class="footer__copyright">© 2021 Mesto Russia</p>
+    </footer>
+
+    <div class="popup">
+        <div class="popup__container">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <form class="popup__form">
+                <fieldset class="popup__fieldset">
+                    <input class="popup__input popup__input_title_name" type="text">
+                    <input class="popup__input popup__input_title_job" type="text">
+                    <button type="submit" class="popup__save-button">Сохранить</button>
+                </fieldset>
+            </form>
+            <button type="button" class="popup__close-button"></button>
         </div>
-
-      </div>
-
-      <button type="button" class="profile__add-button"></button>
-    </section>
-
-
-    <section class="places">
-      <ul class="places__list">
-        <li class="places__card">
-          <img src="/images/karachaevsk.png" alt="Фотография старого монастыря недалеко от Карачаевска" class="places__image">
-          <h2 class="places__title">Карачаевск</h2>
-          <button type="button" class="places__like-button places__like-button_active"></button>
-        </li>
-
-
-        <li class="places__card">
-          <img src="/images/elbrus.png" alt="Фотография горизонта с горой Эльбрус" class="places__image">
-          <h2 class="places__title">Гора Эльбрус</h2>
-          <button type="button" class="places__like-button places__like-button_active"></button>
-        </li>
-
-
-        <li class="places__card">
-          <img src="/images/dombai.png" alt="Пейзаж горного хребта Домбай вдалеке" class="places__image">
-          <h2 class="places__title">Домбай</h2>
-          <button type="button" class="places__like-button places__like-button_active"></button>
-        </li>
-
-
-        <li class="places__card">
-          <img src="/images/elbrus.png" alt="" class="places__image">
-          <h2 class="places__title">Гора Эльбрус</h2>
-          <button type="button" class="places__like-button places__like-button_active"></button>
-        </li>
-
-
-        <li class="places__card">
-          <img src="/images/dombai.png" alt="Пейзаж горного хребта Домбай вдалеке" class="places__image">
-          <h2 class="places__title">Домбай</h2>
-          <button type="button" class="places__like-button places__like-button_active"></button>
-        </li>
-
-
-        <li class="places__card">
-          <img src="/images/karachaevsk.png" alt="Фотография старого монастыря недалеко от Карачаевска" class="places__image">
-          <h2 class="places__title">Карачаево-Черкесия</h2>
-          <button type="button" class="places__like-button places__like-button_active"></button>
-        </li>
-      </ul>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <p class="footer__copyright">© 2021 Mesto Russia</p>
-  </footer>
-
-  <div class="popup">
-    <div class="popup__container">
-      <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form">
-        <fieldset class="popup__fieldset">
-          <input class="popup__input popup__input_title_name" type="text">
-          <input class="popup__input popup__input_title_job" type="text">
-          <button type="submit" class="popup__save-button">Сохранить</button>
-
-
-        </fieldset>
-      </form>
-      <button type="button" class="popup__close-button"></button>
     </div>
-  </div>
 
-  <script src="./scripts/script.js"></script>
+    <script src="./scripts/script.js"></script>
 </body>
 
 </html>

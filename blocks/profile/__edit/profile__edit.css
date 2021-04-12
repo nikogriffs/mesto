@@ -1,8 +1,6 @@
 .profile__edit {
-  display: flex;
-  align-items: baseline;
-  margin: 0;
-  margin-top: 22px;
-  margin-bottom: 10px;
-  padding: 0;
+    display: flex;
+    align-items: baseline;
+    margin: 22px 0 10px;
+    padding: 0;
 }
