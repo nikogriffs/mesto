@@ -10,7 +10,15 @@
   outline: none;
   cursor: pointer;
   transition:  opacity .3s ease;
+
+
 }
 .places__like-button:hover {
   opacity: .5;
+
+
+}
+
+.places__like-button:active {
+  background-image: url(/images/like_active.svg);
 }
