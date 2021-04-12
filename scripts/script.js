@@ -23,15 +23,10 @@ function clickEditButton() {
     jobInput.value = profileJob.textContent;
 }
 
-editButton.addEventListener('click', clickEditButton);
-
 // Функция для закрытия
-
 function clickCloseButton() {
     popup.classList.remove('popup_opened');
 }
-
-closeButton.addEventListener('click', clickCloseButton);
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
@@ -50,6 +45,9 @@ function formSubmitHandler(evt) {
     clickCloseButton();
 }
 
+//Слушатели клика по кнопке для открытия и закрытия окна редактирования
+editButton.addEventListener('click', clickEditButton);
+closeButton.addEventListener('click', clickCloseButton);
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
