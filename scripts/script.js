@@ -1,6 +1,5 @@
 let profile = document.querySelector('.profile');
 let popup = document.querySelector('.popup');
-let places = document.querySelector('.places__card');
 
 // Находим кнопки "Редактировать" и "Закрыть"
 let editButton = profile.querySelector('.profile__edit-button');
