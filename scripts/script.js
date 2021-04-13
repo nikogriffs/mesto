@@ -24,39 +24,53 @@ const initialCards = [{
     }
 ];
 
-let profile = document.querySelector('.profile');
-let popup = document.querySelector('.popup');
+const profile = document.querySelector('.profile');
+const popupEdit = document.querySelector('.popup__edit');
+const popupAdd = document.querySelector('.popup__add');
 
 // Находим кнопки "Редактировать" и "Закрыть"
-let editButton = profile.querySelector('.profile__edit-button');
-let closeButton = popup.querySelector('.popup__close-button');
+const editButton = profile.querySelector('.profile__edit-button');
+const addButton = profile.querySelector('.profile__add-button');
+const closeEditButton = popupEdit.querySelector('.popup__close-button');
+const closeAddButton = popupAdd.querySelector('.popup__close-button');
 
 // Находим поля "Имя" и "О себе"
-let profileName = profile.querySelector('.profile__name');
-let profileJob = profile.querySelector('.profile__job');
+const profileName = profile.querySelector('.profile__name');
+const profileJob = profile.querySelector('.profile__job');
 
 // Находим форму
-let formElement = popup.querySelector('.popup__form');
+const formEditElement = popupEdit.querySelector('.popup__form');
+const formAddElement = popupAdd.querySelector('.popup__form');
 
 // Находим поля формы
-let nameInput = formElement.querySelector('.popup__input_title_name'); // Воспользуйтесь инструментом .querySelector()
-let jobInput = formElement.querySelector('.popup__input_title_job'); // Воспользуйтесь инструментом .querySelector()
+const nameInput = formEditElement.querySelector('.popup__input_title_name'); // Воспользуйтесь инструментом .querySelector()
+const jobInput = formEditElement.querySelector('.popup__input_title_job'); // Воспользуйтесь инструментом .querySelector()
+const placeInput = formAddElement.querySelector('.popup__input_title_place');
+const linkInput = formAddElement.querySelector('.popup__input_title_link');
 
 // Функция для открытия редактирования
 function clickEditButton() {
-    popup.classList.add('popup_opened');
+    popupEdit.classList.add('popup_opened');
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
 }
 
+function clickAddButton() {
+    popupAdd.classList.add('popup_opened');
+}
+
 // Функция для закрытия
-function clickCloseButton() {
-    popup.classList.remove('popup_opened');
+function clickCloseEditButton() {
+    popupEdit.classList.remove('popup_opened');
+}
+
+function clickCloseAddButton() {
+    popupAdd.classList.remove('popup_opened');
 }
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
-function formSubmitHandler(evt) {
+function formEditSubmitHandler(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     // Так мы можем определить свою логику отправки.
     // О том, как это делать, расскажем позже.
@@ -68,12 +82,24 @@ function formSubmitHandler(evt) {
     // Вставьте новые значения с помощью textContent
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
-    clickCloseButton();
+    clickCloseEditButton();
 }
+
+function formAddSubmitHandler(evt) {
+    evt.preventDefault();
+
+    clickCloseAddButton();
+}
+
+
+
 
 //Слушатели клика по кнопке для открытия и закрытия окна редактирования
 editButton.addEventListener('click', clickEditButton);
-closeButton.addEventListener('click', clickCloseButton);
+addButton.addEventListener('click', clickAddButton);
+closeEditButton.addEventListener('click', clickCloseEditButton);
+closeAddButton.addEventListener('click', clickCloseAddButton);
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', formSubmitHandler);
+formEditElement.addEventListener('submit', formEditSubmitHandler);
+formAddElement.addEventListener('submit', formAddSubmitHandler);
