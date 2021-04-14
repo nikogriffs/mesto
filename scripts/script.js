@@ -63,12 +63,17 @@ function clickLikeButton(like) {
     like.target.classList.toggle('places__like-button_active');
 }
 
+function clickTrashButton(trash) {
+    trash.target.closest('.places__card').remove();
+}
+
 function createCard(card) {
     const cardTemplate = template.querySelector('.places__card').cloneNode(true);
     cardTemplate.querySelector('.places__title').textContent = card.name;
     cardTemplate.querySelector('.places__image').src = card.link;
     cardTemplate.querySelector('.places__image').alt = card.name;
     cardTemplate.querySelector('.places__like-button').addEventListener('click', clickLikeButton);
+    cardTemplate.querySelector('.places__trash-button').addEventListener('click', clickTrashButton);
     return cardTemplate;
 }
 
