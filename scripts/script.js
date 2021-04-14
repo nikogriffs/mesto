@@ -29,8 +29,8 @@ const profile = document.querySelector('.profile');
 const popupEdit = document.querySelector('.popup-edit');
 const popupAdd = document.querySelector('.popup-add');
 const popupCard = document.querySelector('.popup-card');
-const popupImageCard = popupCard.querySelector('.popup__image');
-const popupCaptionCard = popupCard.querySelector('.popup__caption');
+const popupImageCard = document.querySelector('.popup__image');
+const popupCaptionCard = document.querySelector('.popup__caption');
 const places = document.querySelector('.places__list');
 const template = places.querySelector('.places__card-template').content;
 
