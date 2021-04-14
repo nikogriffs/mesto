@@ -88,12 +88,6 @@ cards.forEach(function(evt) {
 });
 
 
-function addCard(evt) {
-
-
-}
-
-
 
 
 // Функция для лайка
