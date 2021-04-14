@@ -26,9 +26,9 @@ const cards = [{
 
 // Находим необходимые элементы для дальнейшей работы в ДОМ
 const profile = document.querySelector('.profile');
-const popupEdit = document.querySelector('.popup__edit');
-const popupAdd = document.querySelector('.popup__add');
-const popupCard = document.querySelector('.popup__card');
+const popupEdit = document.querySelector('.popup-edit');
+const popupAdd = document.querySelector('.popup-add');
+const popupCard = document.querySelector('.popup-card');
 const popupImageCard = popupCard.querySelector('.popup__image');
 const popupCaptionCard = popupCard.querySelector('.popup__caption');
 const places = document.querySelector('.places__list');
