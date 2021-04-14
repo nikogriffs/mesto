@@ -43,6 +43,8 @@ const closeImageCard = popupImageCard.querySelector('.popup__close-button');
 // Находим поля "Имя" и "О себе"
 const profileName = profile.querySelector('.profile__name');
 const profileJob = profile.querySelector('.profile__job');
+let profilePlace = profile.querySelector('.profile__place');
+let profileLink = profile.querySelector('.profile__link');
 
 // Находим формы
 const formEditElement = popupEdit.querySelector('.popup__form');
@@ -85,6 +87,15 @@ cards.forEach(function(evt) {
     places.append(createCard(evt));
 });
 
+
+function addCard(evt) {
+
+
+}
+
+
+
+
 // Функция для лайка
 function clickLikeButton(evt) {
     evt.target.classList.toggle('places__like-button_active');
@@ -125,6 +136,18 @@ function formEditSubmitHandler(evt) {
 // Обработчик «отправки» формы в окне добавления
 function formAddSubmitHandler(evt) {
     evt.preventDefault();
+    profilePlace = placeInput.value;
+    profileLink = linkInput.value;
+    const cardTemplate = template.querySelector('.places__card').cloneNode(true);
+    cardTemplate.querySelector('.places__title').textContent = placeInput.value;
+    cardTemplate.querySelector('.places__image').src = linkInput.value;
+    cardTemplate.querySelector('.places__image').alt = placeInput.value;
+    cardTemplate.querySelector('.places__like-button').addEventListener('click', clickLikeButton);
+    cardTemplate.querySelector('.places__trash-button').addEventListener('click', clickTrashButton);
+    cardTemplate.querySelector('.places__image').addEventListener('click', clickImage);
+
+    places.prepend(cardTemplate);
+
     clickCloseAddButton();
 }
 //Слушатели клика по кнопке для открытия и закрытия форм
