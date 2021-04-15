@@ -29,17 +29,17 @@ const profile = document.querySelector('.profile');
 const popupEdit = document.querySelector('.popup-edit');
 const popupAdd = document.querySelector('.popup-add');
 const popupCard = document.querySelector('.popup-card');
-const popupImageCard = document.querySelector('.popup__image');
-const popupCaptionCard = document.querySelector('.popup__caption');
+const popupImage = document.querySelector('.popup__image');
+const popupCaption = document.querySelector('.popup__caption');
 const places = document.querySelector('.places__list');
 const template = places.querySelector('.places__card-template').content;
 
 // Находим кнопки "Добавления", "Редактирования", "Закрытия"
 const editButton = profile.querySelector('.profile__edit-button');
 const addButton = profile.querySelector('.profile__add-button');
-const closeEditButton = popupEdit.querySelector('.popup__close-button');
-const closeAddButton = popupAdd.querySelector('.popup__close-button');
-const closeImageCard = popupImageCard.querySelector('.popup__close-button');
+const popupEditCloseButton = popupEdit.querySelector('.popup__close-button');
+const popupAddCloseButton = popupAdd.querySelector('.popup__close-button');
+const popupCardCloseButton = popupCard.querySelector('.popup__close-button');
 
 // Находим поля "Имя" и "О себе" на сайте
 const profileName = profile.querySelector('.profile__name');
@@ -56,11 +56,11 @@ const placeInput = formAddElement.querySelector('.popup__input_title_place');
 const linkInput = formAddElement.querySelector('.popup__input_title_link');
 
 // Универсальные функции открытия и закрытия попапа
-function popupOpened(popup) {
+function openPopup(popup) {
     popup.classList.add('popup_opened');
 }
 
-function popupClosed(popup) {
+function closePopup(popup) {
     popup.classList.remove('popup_opened');
 }
 
@@ -71,9 +71,9 @@ function createCard(card) {
     cardTemplate.querySelector('.places__image').src = card.link;
     cardTemplate.querySelector('.places__image').alt = card.name;
     // Вешаем слушателей на элементы карточек из массива
-    cardTemplate.querySelector('.places__like-button').addEventListener('click', clickLikeButton);
-    cardTemplate.querySelector('.places__trash-button').addEventListener('click', clickTrashButton);
-    cardTemplate.querySelector('.places__image').addEventListener('click', clickImage);
+    cardTemplate.querySelector('.places__like-button').addEventListener('click', handleLikeCard);
+    cardTemplate.querySelector('.places__trash-button').addEventListener('click', handleDeleteCard);
+    cardTemplate.querySelector('.places__image').addEventListener('click', openFullImage);
     return cardTemplate;
 }
 
@@ -83,80 +83,80 @@ cards.forEach(function(evt) {
 });
 
 // Функция попапа при клике на картинку
-function clickImage(evt) {
-    popupCaptionCard.textContent = evt.target.alt;
-    popupImageCard.src = evt.target.src;
-    popupImageCard.alt = evt.target.alt;
-    popupOpened(popupCard);
+function openFullImage(evt) {
+    popupCaption.textContent = evt.target.alt;
+    popupImage.src = evt.target.src;
+    popupImage.alt = evt.target.alt;
+    openPopup(popupCard);
 }
 
 // Функция для закрытия попапа изображения
-function clickCloseCard() {
-    popupClosed(popupCard);
+function closeFullImage() {
+    closePopup(popupCard);
 }
 
 // Функция для отметки лайков или снятия
-function clickLikeButton(evt) {
+function handleLikeCard(evt) {
     evt.target.classList.toggle('places__like-button_active');
 }
 
 // Функция для удаления карточки
-function clickTrashButton(evt) {
+function handleDeleteCard(evt) {
     evt.target.closest('.places__card').remove();
 }
 
 // Функция для открытия формы редактирования информации о себе
-function clickEditButton() {
-    popupOpened(popupEdit);
+function openEditPopup() {
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
+    openPopup(popupEdit);
 }
 
 // Функция для закрытия формы редактирования
-function clickCloseEditButton() {
-    popupClosed(popupEdit);
+function closeEditPopup() {
+    closePopup(popupEdit);
 }
 
 // Функция для открытия формы добавления карточек
-function clickAddButton() {
-    popupOpened(popupAdd);
+function openAddPopup() {
+    openPopup(popupAdd);
 }
 
 // Функция для закрытия формы добавления
-function clickCloseAddButton() {
-    popupClosed(popupAdd);
+function closeAddPopup() {
+    closePopup(popupAdd);
 }
 
 // Обработчик «отправки» формы в окне редактирования
-function formEditSubmitHandler(evt) {
+function handleEditFormSubmit(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
-    clickCloseEditButton();
+    closeEditPopup();
 }
 
 // Обработчик «отправки» формы в окне добавления (функция добавление новых карточек)
-function formAddSubmitHandler(evt) {
+function handleAddFormSubmit(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы
     const cardTemplate = template.querySelector('.places__card').cloneNode(true);
     cardTemplate.querySelector('.places__title').textContent = placeInput.value;
     cardTemplate.querySelector('.places__image').src = linkInput.value;
     cardTemplate.querySelector('.places__image').alt = placeInput.value;
     // Вешаем слушателей для новых карточек
-    cardTemplate.querySelector('.places__like-button').addEventListener('click', clickLikeButton);
-    cardTemplate.querySelector('.places__trash-button').addEventListener('click', clickTrashButton);
-    cardTemplate.querySelector('.places__image').addEventListener('click', clickImage);
+    cardTemplate.querySelector('.places__like-button').addEventListener('click', handleLikeCard);
+    cardTemplate.querySelector('.places__trash-button').addEventListener('click', handleDeleteCard);
+    cardTemplate.querySelector('.places__image').addEventListener('click', openFullImage);
     places.prepend(cardTemplate);
-    clickCloseAddButton();
+    closeAddPopup();
 }
 
 //Слушатели клика по кнопке для открытия и закрытия попапов
-editButton.addEventListener('click', clickEditButton);
-addButton.addEventListener('click', clickAddButton);
-closeEditButton.addEventListener('click', clickCloseEditButton);
-closeAddButton.addEventListener('click', clickCloseAddButton);
-popupCard.addEventListener('click', clickCloseCard);
+editButton.addEventListener('click', openEditPopup);
+addButton.addEventListener('click', openAddPopup);
+popupEditCloseButton.addEventListener('click', closeEditPopup);
+popupAddCloseButton.addEventListener('click', closeAddPopup);
+popupCardCloseButton.addEventListener('click', closeFullImage);
 // Прикрепляем обработчик к формам:
 // он будет следить за событием “submit” - «отправка»
-formEditElement.addEventListener('submit', formEditSubmitHandler);
-formAddElement.addEventListener('submit', formAddSubmitHandler);
+formEditElement.addEventListener('submit', handleEditFormSubmit);
+formAddElement.addEventListener('submit', handleAddFormSubmit);
