@@ -138,17 +138,13 @@ function handleEditFormSubmit(evt) {
 // Обработчик «отправки» формы в окне добавления (функция добавление новых карточек)
 function handleAddFormSubmit(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы
-    const cardTemplate = template.querySelector('.places__card').cloneNode(true);
-    cardTemplate.querySelector('.places__title').textContent = placeInput.value;
-    cardTemplate.querySelector('.places__image').src = linkInput.value;
-    cardTemplate.querySelector('.places__image').alt = placeInput.value;
-    // Вешаем слушателей для новых карточек
-    cardTemplate.querySelector('.places__like-button').addEventListener('click', handleLikeCard);
-    cardTemplate.querySelector('.places__trash-button').addEventListener('click', handleDeleteCard);
-    cardTemplate.querySelector('.places__image').addEventListener('click', openFullImage);
-    places.prepend(cardTemplate);
+    const card = {
+        name: placeInput.value,
+        link: linkInput.value
+    };
+    places.prepend(createCard(card));
     closeAddPopup();
-}
+};
 
 //Слушатели клика по кнопке для открытия и закрытия попапов
 editButton.addEventListener('click', openEditPopup);
