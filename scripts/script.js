@@ -58,6 +58,18 @@ const linkInput = formAddElement.querySelector('.popup__input_title_link');
 // Универсальные функции открытия и закрытия попапа
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    //Добавляем слушатель на клавишу esc
+    document.addEventListener('keydown', function(esc) {
+        if (esc.key === 'Escape') {
+            closePopup(popup);
+        }
+    });
+    //Добавляем слушатель по клику за пределами попапа
+    document.addEventListener('click', function(evt) {
+        if (evt.target.classList.contains('popup')) {
+            closePopup(popup);
+        }
+    });
 }
 
 function closePopup(popup) {
@@ -138,11 +150,11 @@ function handleEditFormSubmit(evt) {
 // Обработчик «отправки» формы в окне добавления (функция добавление новых карточек)
 function handleAddFormSubmit(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы
-    const card = {
+    const newCard = {
         name: placeInput.value,
         link: linkInput.value
     };
-    places.prepend(createCard(card));
+    places.prepend(createCard(newCard));
     closeAddPopup();
 };
 
