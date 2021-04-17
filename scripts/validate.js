@@ -79,15 +79,13 @@ function enableValidation(validation) {
 enableValidation(validation);
 
 // 0. Очистка сообщения об ошибке, при открытии попапа и
-//активная кнопка сохранить при открытии попапа, если данные уже введены
-function clearErrorData(validation) {
-  const formArray = Array.from(document.querySelectorAll(validation.formSelector));
-  formArray.forEach(function (form) {
-    const inputArray = Array.from(form.querySelectorAll(validation.inputSelector));
-    const button = form.querySelector(validation.buttonSelector)
-    switchButtonStatus(inputArray, button, validation);
-    inputArray.forEach(function (input) {
-      hideError(form, input, validation);
-    });
+// активная кнопка сохранить при открытии попапа, если данные уже введены
+// Убрал перебор форм, теперь функция работает на конкретную форму, и не создаётся лишний массив из форм
+function clearErrorData(form, validation) {
+  const inputArray = Array.from(form.querySelectorAll(validation.inputSelector));
+  inputArray.forEach(function (input) {
+    hideError(form, input, validation);
   });
+  const button = form.querySelector(validation.buttonSelector)
+  switchButtonStatus(inputArray, button, validation);
 }

@@ -118,11 +118,11 @@ editButton.addEventListener('click', () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupEdit);
-  clearErrorData(validation);
+  clearErrorData(formEditElement, validation);
 });
 addButton.addEventListener('click', () => {
   openPopup(popupAdd)
-  clearErrorData(validation);
+  clearErrorData(formAddElement, validation);
   formAddElement.reset();
 });
 popupEditCloseButton.addEventListener('click', () => closePopup(popupEdit));
