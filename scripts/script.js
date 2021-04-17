@@ -32,7 +32,7 @@ const popupCard = document.querySelector('.popup-card');
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
 const places = document.querySelector('.places__list');
-const template = places.querySelector('.places__card-template').content;
+const template = document.querySelector('#card-template').content;
 
 // Находим кнопки "Добавления", "Редактирования", "Закрытия"
 const editButton = profile.querySelector('.profile__edit-button');

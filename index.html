@@ -30,14 +30,6 @@
 
     <section class="places">
       <ul class="places__list">
-        <template class="places__card-template">
-          <li class="places__card">
-            <img src="#" alt="#" class="places__image">
-            <h2 class="places__title"></h2>
-            <button type="button" class="places__like-button"></button>
-            <button type="button" class="places__trash-button"></button>
-          </li>
-        </template>
       </ul>
     </section>
   </main>
@@ -91,6 +83,15 @@
       </figure>
     </div>
   </div>
+
+  <template id="card-template">
+    <li class="places__card">
+      <img src="#" alt="#" class="places__image">
+      <h2 class="places__title"></h2>
+      <button type="button" class="places__like-button"></button>
+      <button type="button" class="places__trash-button"></button>
+    </li>
+  </template>
 
   <script src="./scripts/script.js"></script>
   <script src="./scripts/validate.js"></script>
