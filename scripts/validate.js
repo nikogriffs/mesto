@@ -25,7 +25,7 @@ function hideError(form, input) {
 
 // 6. Проверяем, еcть ли ошибки при вводе
 function checkInputValidity(form, input) {
-  if (input.validity.valid === false) {
+  if (!input.validity.valid) {
     showError(form, input, input.validationMessage);
   } else {
     hideError(form, input);
@@ -35,7 +35,7 @@ function checkInputValidity(form, input) {
 // 5. Проверяем, все ли поля валидны
 function hasInvalidInput(inputArray) {
   return inputArray.some(function (input) {
-    return input.validity.valid === false;
+    return !input.validity.valid;
   });
 }
 
