@@ -32,25 +32,30 @@ const linkInput = formAddElement.querySelector('.popup__input_title_link');
 // Универсальные функции открытия и закрытия попапа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  clearErrorData(validation);
-  formAddElement.reset();
-  //Добавляем слушатель на клавишу esc
-  document.addEventListener('keydown', function (esc) {
-    if (esc.key === 'Escape') {
-      closePopup(popup);
-    }
-  });
-
-  //Добавляем слушатель по клику за пределами попапа
-  document.addEventListener('mousedown', function (evt) {
-    if (evt.target.classList.contains('popup')) {
-      closePopup(popup);
-    }
-  });
+  document.addEventListener('keydown', closePopupByEsc);
+  document.addEventListener('mousedown', closePopupOnOverlay);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByEsc);
+  document.removeEventListener('mousedown', closePopupOnOverlay);
+}
+
+// Закрытие по оверлею
+function closePopupOnOverlay(evt) {
+  if (evt.target.classList.contains('popup_opened')){
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  }
+}
+
+// Закрытие попапа на Escape
+function closePopupByEsc(evt) {
+  if (evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  }
 }
 
 // Функция создания первоначальных карточек из готового массива и заготовки (template)
@@ -106,7 +111,6 @@ function handleAddFormSubmit(evt) {
   };
   places.prepend(createCard(newCard));
   closePopup(popupAdd);
-  formAddElement.reset();
 }
 
 //Слушатели клика по кнопке для открытия и закрытия попапов
@@ -114,8 +118,13 @@ editButton.addEventListener('click', () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupEdit);
+  clearErrorData(validation);
 });
-addButton.addEventListener('click', () => openPopup(popupAdd));
+addButton.addEventListener('click', () => {
+  openPopup(popupAdd)
+  clearErrorData(validation);
+  formAddElement.reset();
+});
 popupEditCloseButton.addEventListener('click', () => closePopup(popupEdit));
 popupAddCloseButton.addEventListener('click', () => closePopup(popupAdd));
 popupCardCloseButton.addEventListener('click', () => closePopup(popupCard));
