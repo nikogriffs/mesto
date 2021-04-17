@@ -39,3 +39,4 @@
 @import url(../blocks/popup/__input/_title/popup__input_title_error.css);
 @import url(../blocks/popup/__error/_visible/popup__error_visible.css);
 @import url(../blocks/popup/__save-button/__disabled/popup__save-button_disabled.css);
+@import url(../blocks/popup/__container/_card/popup__container_card.css);
