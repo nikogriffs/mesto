@@ -40,6 +40,7 @@ function openPopup(popup) {
       closePopup(popup);
     }
   });
+
   //Добавляем слушатель по клику за пределами попапа
   document.addEventListener('mousedown', function (evt) {
     if (evt.target.classList.contains('popup')) {
@@ -78,11 +79,6 @@ function openFullImage(evt) {
   openPopup(popupCard);
 }
 
-// Функция для закрытия попапа изображения
-function closeFullImage() {
-  closePopup(popupCard);
-}
-
 // Функция для отметки лайков или снятия
 function handleLikeCard(evt) {
   evt.target.classList.toggle('places__like-button_active');
@@ -93,34 +89,12 @@ function handleDeleteCard(evt) {
   evt.target.closest('.places__card').remove();
 }
 
-// Функция для открытия формы редактирования информации о себе
-function openEditPopup() {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
-  openPopup(popupEdit);
-}
-
-// Функция для закрытия формы редактирования
-function closeEditPopup() {
-  closePopup(popupEdit);
-}
-
-// Функция для открытия формы добавления карточек
-function openAddPopup() {
-  openPopup(popupAdd);
-}
-
-// Функция для закрытия формы добавления
-function closeAddPopup() {
-  closePopup(popupAdd);
-}
-
 // Обработчик «отправки» формы в окне редактирования
 function handleEditFormSubmit(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  closeEditPopup();
+  closePopup(popupEdit);
 }
 
 // Обработчик «отправки» формы в окне добавления (функция добавление новых карточек)
@@ -131,16 +105,20 @@ function handleAddFormSubmit(evt) {
     link: linkInput.value
   };
   places.prepend(createCard(newCard));
-  closeAddPopup();
+  closePopup(popupAdd);
   formAddElement.reset();
 }
 
 //Слушатели клика по кнопке для открытия и закрытия попапов
-editButton.addEventListener('click', openEditPopup);
-addButton.addEventListener('click', openAddPopup);
-popupEditCloseButton.addEventListener('click', closeEditPopup);
-popupAddCloseButton.addEventListener('click', closeAddPopup);
-popupCardCloseButton.addEventListener('click', closeFullImage);
+editButton.addEventListener('click', () => {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+  openPopup(popupEdit);
+});
+addButton.addEventListener('click', () => openPopup(popupAdd));
+popupEditCloseButton.addEventListener('click', () => closePopup(popupEdit));
+popupAddCloseButton.addEventListener('click', () => closePopup(popupAdd));
+popupCardCloseButton.addEventListener('click', () => closePopup(popupCard));
 // Прикрепляем обработчик к формам:
 // он будет следить за событием “submit” - «отправка»
 formEditElement.addEventListener('submit', handleEditFormSubmit);
