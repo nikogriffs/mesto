@@ -122,7 +122,7 @@ editButton.addEventListener('click', () => {
 });
 addButton.addEventListener('click', () => {
   formAddElement.reset();
-  openPopup(popupAdd)
+  openPopup(popupAdd);
   clearErrorData(formAddElement, validation);
 });
 popupEditCloseButton.addEventListener('click', () => closePopup(popupEdit));
