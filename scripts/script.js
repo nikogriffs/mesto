@@ -44,7 +44,7 @@ function closePopup(popup) {
 
 // Закрытие по оверлею
 function closePopupOnOverlay(evt) {
-  if (evt.target.classList.contains('popup_opened')){
+  if (evt.target.classList.contains('popup_opened')) {
     const popup = document.querySelector('.popup_opened');
     closePopup(popup);
   }
