@@ -6,7 +6,6 @@ const popupCard = document.querySelector('.popup-card');
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
 const places = document.querySelector('.places__list');
-const template = document.querySelector('#card-template').content;
 
 // Находим кнопки "Добавления", "Редактирования", "Закрытия"
 const editButton = profile.querySelector('.profile__edit-button');
@@ -58,41 +57,19 @@ function closePopupByEsc(evt) {
   }
 }
 
-// Функция создания первоначальных карточек из готового массива и заготовки (template)
-function createCard(card) {
-  const cardTemplate = template.querySelector('.places__card').cloneNode(true);
-  cardTemplate.querySelector('.places__title').textContent = card.name;
-  cardTemplate.querySelector('.places__image').src = card.link;
-  cardTemplate.querySelector('.places__image').alt = card.name;
-  // Вешаем слушателей на элементы карточек из массива
-  cardTemplate.querySelector('.places__like-button').addEventListener('click', handleLikeCard);
-  cardTemplate.querySelector('.places__trash-button').addEventListener('click', handleDeleteCard);
-  cardTemplate.querySelector('.places__image').addEventListener('click', openFullImage);
-  return cardTemplate;
-}
-
-// Исполнение функции для массива с карточками
-cards.forEach(function (evt) {
-  places.append(createCard(evt));
-});
-
 // Функция попапа при клике на картинку
 function openFullImage(evt) {
   popupCaption.textContent = evt.target.alt;
   popupImage.src = evt.target.src;
   popupImage.alt = evt.target.alt;
   openPopup(popupCard);
-}
+ }
 
-// Функция для отметки лайков или снятия
-function handleLikeCard(evt) {
-  evt.target.classList.toggle('places__like-button_active');
-}
-
-// Функция для удаления карточки
-function handleDeleteCard(evt) {
-  evt.target.closest('.places__card').remove();
-}
+// Исполнение функции для массива с карточками
+cards.forEach(function (evt) {
+  const card = new Card(evt, '#card-template', openFullImage);
+  places.append(card.createCard());
+});
 
 // Обработчик «отправки» формы в окне редактирования
 function handleEditFormSubmit(evt) {
@@ -108,8 +85,9 @@ function handleAddFormSubmit(evt) {
   const newCard = {
     name: placeInput.value,
     link: linkInput.value
-  };
-  places.prepend(createCard(newCard));
+  }
+  const card = new Card(newCard, '#card-template', openFullImage);
+  places.prepend(card.createCard());
   closePopup(popupAdd);
 }
 
