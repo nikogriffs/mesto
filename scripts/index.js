@@ -1,6 +1,6 @@
-import { initialCards } from './initial-сards.js';
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
+import { initialCards } from '/initial-сards.js';
+import { Card } from '/Card.js';
+import { FormValidator } from '/FormValidator.js';
 
 // Находим необходимые элементы для дальнейшей работы в ДОМ
 const profile = document.querySelector('.profile');
