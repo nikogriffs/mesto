@@ -2,6 +2,8 @@ export class FormValidator {
   constructor(config, form) {
     this._configValidation = config;
     this._form = form;
+    this._inputList = Array.from(this._form.querySelectorAll(this._configValidation.inputSelector));
+    this._submitButton = this._form.querySelector(this._configValidation.buttonSelector);
   }
 
   // 2. Метод перебора всех форм на странице, складываем в массив
@@ -18,31 +20,29 @@ export class FormValidator {
   // 3. Метод перебора всех полей ввода на странице, складываем их в массив, также находим кнопку,
   // и проверяем её активность
   _setEventListeners() {
-    const inputArray = Array.from(this._form.querySelectorAll(this._configValidation.inputSelector));
-    const button = this._form.querySelector(this._configValidation.buttonSelector);
-    this._switchButtonStatus(inputArray, button);
-    inputArray.forEach((input) => {
+    this._switchButtonStatus(this._inputList, this._submitButton);
+    this._inputList.forEach((input) => {
       input.addEventListener('input', () => {
         this._checkInputValidity(input);
-        this._switchButtonStatus(inputArray, button);
+        this._switchButtonStatus(this._inputList, this._submitButton);
       });
     });
   }
 
   // 4. Метод активации или отключения кнопки. Кнопка не активна, пока все поля не будут валидны
-  _switchButtonStatus(inputArray, button) {
-    if (this._hasInvalidInput(inputArray)) {
-      button.classList.add(this._configValidation.disabledButtonClass);
-      button.setAttribute('disabled', true);
+  _switchButtonStatus() {
+    if (this._hasInvalidInput(this._inputList)) {
+      this._submitButton.classList.add(this._configValidation.disabledButtonClass);
+      this._submitButton.setAttribute('disabled', true);
     } else {
-      button.classList.remove(this._configValidation.disabledButtonClass);
-      button.removeAttribute('disabled');
+      this._submitButton.classList.remove(this._configValidation.disabledButtonClass);
+      this._submitButton.removeAttribute('disabled');
     }
   }
 
   // 5. Проверяем, все ли поля валидны
-  _hasInvalidInput(inputArray) {
-    return inputArray.some((input) => {
+  _hasInvalidInput() {
+    return this._inputList.some((input) => {
       return !input.validity.valid;
     });
   }
@@ -76,11 +76,9 @@ export class FormValidator {
   // убирает сообщение об ошибке, если данные уже были введены, но не отправлены
   // и проверяет кнопку сохранить, если данные были отправлены
   clearErrorData() {
-    const inputArray = Array.from(this._form.querySelectorAll(this._configValidation.inputSelector));
-    inputArray.forEach((input) => {
+    this._inputList.forEach((input) => {
       this._hideError(input);
     });
-    const button = this._form.querySelector(this._configValidation.buttonSelector)
-    this._switchButtonStatus(inputArray, button);
+    this._switchButtonStatus(this._inputList, this._submitButton);
   }
 }
