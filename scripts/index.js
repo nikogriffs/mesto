@@ -48,7 +48,7 @@ formEditValidation.enableValidation();
 const formAddValidation = new FormValidator(configValidation, formAddElement);
 formAddValidation.enableValidation();
 
-const esc = 'Escape';
+const escButton = 'Escape';
 
 // Универсальные функции открытия и закрытия попапа
 function openPopup(popup) {
@@ -73,7 +73,7 @@ function closePopupOnOverlay(evt) {
 
 // Закрытие попапа на Escape
 function closePopupByEsc(evt) {
-  if (evt.key === esc) {
+  if (evt.key === escButton) {
     const popup = document.querySelector('.popup_opened');
     closePopup(popup);
   }

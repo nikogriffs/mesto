@@ -4,10 +4,11 @@ export class Card {
     this._name = data.name;
     this._link = data.link;
     this._clickImage = clickImage;
+
   }
 
   _getTemplate() {
-    const cardElement = document.querySelector('#card-template').content.querySelector('.places__card').cloneNode(true);
+    const cardElement = document.querySelector(this._cardSelector).content.querySelector('.places__card').cloneNode(true);
 
     return cardElement;
   }
@@ -36,6 +37,6 @@ export class Card {
 
   // Метод для удаления карточки
   _handleDeleteCard() {
-    this.closest('.places__card').remove();
+    this._element.remove();
   }
 }
