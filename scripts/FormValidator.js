@@ -6,18 +6,12 @@ export class FormValidator {
     this._submitButton = this._form.querySelector(this._configValidation.buttonSelector);
   }
 
-  // 2. Метод перебора всех форм на странице, складываем в массив
+  // 2. Включение метода валидации для конкретной формы
   enableValidation() {
-    const formArray = Array.from(document.querySelectorAll(this._configValidation.formSelector));
-    formArray.forEach(() => {
-      this._form.addEventListener('submit', (evt) => {
-        evt.preventDefault();
-      });
       this._setEventListeners();
-    });
   }
 
-  // 3. Метод перебора всех полей ввода на странице, складываем их в массив, также находим кнопку,
+  // 3. Метод перебора всех полей ввода у формы, складываем их в массив, также находим кнопку,
   // и проверяем её активность
   _setEventListeners() {
     this._switchButtonStatus(this._inputList, this._submitButton);
