@@ -44,10 +44,10 @@
       <form class="popup__form" name="profile-edit" novalidate>
         <fieldset class="popup__fieldset">
           <input class="popup__input popup__input_title_name" id="name" type="text" name="name" placeholder="Имя"
-            required minlength="2" maxlength="40">
+            required minlength="2" maxlength="40" autocomplete="off" required>
           <span class="popup__error" id="name-error"></span>
           <input class="popup__input popup__input_title_job" id="job" type="text" name="job" placeholder="О себе"
-            required minlength="2" maxlength="200">
+            required minlength="2" maxlength="200" autocomplete="off" required>
           <span class="popup__error" id="job-error"></span>
           <button type="submit" class="popup__save-button">Сохранить</button>
         </fieldset>
@@ -62,10 +62,10 @@
       <form class="popup__form" name="place-add" novalidate>
         <fieldset class="popup__fieldset">
           <input class="popup__input popup__input_title_place" id="place" type="text" name="place"
-            placeholder="Название" required minlength="2" maxlength="30">
+            placeholder="Название" required minlength="2" maxlength="30" autocomplete="off" required>
           <span class="popup__error" id="place-error"></span>
           <input class="popup__input popup__input_title_link" id="link" type="url" name="link"
-            placeholder="Ссылка на картинку" required>
+            placeholder="Ссылка на картинку" autocomplete="off" required>
           <span class="popup__error" id="link-error"></span>
           <button type="submit" class="popup__save-button popup__save-button_disabled">Создать</button>
         </fieldset>
@@ -94,9 +94,10 @@
   </template>
 
   <script src="./scripts/initial-сards.js"></script>
-  <script src="./scripts/card.js"></script>
+  <script src="./scripts/Card.js"></script>
+  <script src="./scripts/FormValidator.js"></script>
   <script src="./scripts/script.js"></script>
-  <script src="./scripts/validate.js"></script>
+
 </body>
 
 </html>
