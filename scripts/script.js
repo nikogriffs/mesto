@@ -28,6 +28,22 @@ const jobInput = formEditElement.querySelector('.popup__input_title_job');
 const placeInput = formAddElement.querySelector('.popup__input_title_place');
 const linkInput = formAddElement.querySelector('.popup__input_title_link');
 
+// Конфиг валидации
+const configValidation = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  buttonSelector: '.popup__save-button',
+  disabledButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: 'popup__input_title_error',
+  errorClass: 'popup__error_visible'
+}
+
+//Запускаем функции проверки валидации форм
+const formEditValidation = new FormValidator(configValidation, formEditElement);
+formEditValidation.enableValidation();
+const formAddValidation = new FormValidator(configValidation, formAddElement);
+formAddValidation.enableValidation();
+
 // Универсальные функции открытия и закрытия попапа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -63,10 +79,10 @@ function openFullImage(evt) {
   popupImage.src = evt.target.src;
   popupImage.alt = evt.target.alt;
   openPopup(popupCard);
- }
+}
 
 // Исполнение функции для массива с карточками
-cards.forEach(function (evt) {
+cards.forEach((evt) => {
   const card = new Card(evt, '#card-template', openFullImage);
   places.append(card.createCard());
 });
@@ -96,12 +112,12 @@ editButton.addEventListener('click', () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupEdit);
-  clearErrorData(formEditElement, validation);
+  formEditValidation.clearErrorData();
 });
 addButton.addEventListener('click', () => {
   formAddElement.reset();
   openPopup(popupAdd);
-  clearErrorData(formAddElement, validation);
+  formAddValidation.clearErrorData();
 });
 popupEditCloseButton.addEventListener('click', () => closePopup(popupEdit));
 popupAddCloseButton.addEventListener('click', () => closePopup(popupAdd));
