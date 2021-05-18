@@ -85,10 +85,15 @@ function openFullImage(evt) {
   openPopup(popupCard);
 }
 
-// Исполнение функции для массива с карточками
+// Создание функции для генерации карточек
+function generateCard(data) {
+  const card = new Card(data, '#card-template', openFullImage);
+  return card.createCard();
+}
+
+// Создание первоначальных карточек
 initialCards.forEach((evt) => {
-  const card = new Card(evt, '#card-template', openFullImage);
-  places.append(card.createCard());
+  places.append(generateCard(evt));
 });
 
 // Обработчик «отправки» формы в окне редактирования
@@ -106,8 +111,7 @@ function handleAddFormSubmit(evt) {
     name: placeInput.value,
     link: linkInput.value
   }
-  const card = new Card(newCard, '#card-template', openFullImage);
-  places.prepend(card.createCard());
+  places.prepend(generateCard(newCard));
   closePopup(popupAdd);
 }
 
