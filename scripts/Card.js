@@ -15,15 +15,16 @@ export class Card {
   // Метод создания первоначальных карточек из готового массива и заготовки (template)
   createCard() {
     this._element = this._getTemplate();
+    const cardImage = this._element.querySelector('.places__image');
 
     this._element.querySelector('.places__title').textContent = this._name;
-    this._element.querySelector('.places__image').src = this._link;
-    this._element.querySelector('.places__image').alt = this._name;
+    cardImage.src = this._link;
+    cardImage.alt = this._name;
 
     // Вешаем слушателей на элементы карточек из массива
     this._element.querySelector('.places__like-button').addEventListener('click', this._handleLikeCard);
     this._element.querySelector('.places__trash-button').addEventListener('click', this._handleDeleteCard);
-    this._element.querySelector('.places__image').addEventListener('click', this._clickImage);
+    cardImage.addEventListener('click', this._clickImage);
 
     return this._element;
   }
