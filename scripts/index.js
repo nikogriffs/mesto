@@ -1,4 +1,4 @@
-import { cards } from './initial-сards.js';
+import { initialCards } from './initial-сards.js';
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 
@@ -86,7 +86,7 @@ function openFullImage(evt) {
 }
 
 // Исполнение функции для массива с карточками
-cards.forEach((evt) => {
+initialCards.forEach((evt) => {
   const card = new Card(evt, '#card-template', openFullImage);
   places.append(card.createCard());
 });
