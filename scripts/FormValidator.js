@@ -14,18 +14,17 @@ export class FormValidator {
   // 3. Метод перебора всех полей ввода у формы, складываем их в массив, также находим кнопку,
   // и проверяем её активность
   _setEventListeners() {
-    this._switchButtonStatus(this._inputList, this._submitButton);
     this._inputList.forEach((input) => {
       input.addEventListener('input', () => {
         this._checkInputValidity(input);
-        this._switchButtonStatus(this._inputList, this._submitButton);
+        this._switchButtonStatus();
       });
     });
   }
 
   // 4. Метод активации или отключения кнопки. Кнопка не активна, пока все поля не будут валидны
   _switchButtonStatus() {
-    if (this._hasInvalidInput(this._inputList)) {
+    if (this._hasInvalidInput()) {
       this._submitButton.classList.add(this._configValidation.disabledButtonClass);
       this._submitButton.setAttribute('disabled', true);
     } else {
@@ -73,6 +72,6 @@ export class FormValidator {
     this._inputList.forEach((input) => {
       this._hideError(input);
     });
-    this._switchButtonStatus(this._inputList, this._submitButton);
+    this._switchButtonStatus();
   }
 }
