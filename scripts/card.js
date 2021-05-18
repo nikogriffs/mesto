@@ -1,4 +1,4 @@
-class Card {
+export class Card {
   constructor(data, cardSelector, clickImage) {
     this._cardSelector = cardSelector;
     this._name = data.name;
