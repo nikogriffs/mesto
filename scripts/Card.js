@@ -4,7 +4,6 @@ export class Card {
     this._name = data.name;
     this._link = data.link;
     this._clickImage = clickImage;
-
   }
 
   _getTemplate() {
@@ -24,7 +23,9 @@ export class Card {
 
     // Вешаем слушателей на элементы карточек из массива
     this._element.querySelector('.places__like-button').addEventListener('click', this._handleLikeCard);
-    this._element.querySelector('.places__trash-button').addEventListener('click', this._handleDeleteCard);
+    this._element.querySelector('.places__trash-button').addEventListener('click', () => {
+      this._handleDeleteCard();
+    });
     cardImage.addEventListener('click', this._clickImage);
 
     return this._element;
@@ -38,5 +39,6 @@ export class Card {
   // Метод для удаления карточки
   _handleDeleteCard() {
     this._element.remove();
+    this._element = null;
   }
 }
