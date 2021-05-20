@@ -9,7 +9,7 @@ const popupAdd = document.querySelector('.popup-add');
 const popupCard = document.querySelector('.popup-card');
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
-const places = document.querySelector('.places__list');
+//const places = document.querySelector('.places__list');
 
 // Находим кнопки "Добавления", "Редактирования", "Закрытия"
 const editButton = profile.querySelector('.profile__edit-button');
@@ -50,6 +50,65 @@ formAddValidation.enableValidation();
 
 const escButton = 'Escape';
 
+class Popup {
+  constructor(popupSelector) {
+    this._popup = document.querySelector(popupSelector);
+  }
+
+  open() {
+    this._popup.classList.add(.);
+  }
+
+  close() {
+    this._popup.classList.add(.);
+  }
+
+  _handleEscClose(e) {
+
+  }
+
+  setEventListeners() {
+    this._popup.querySelector(.).addEL(() => {
+      this.close();
+    });
+  }
+}
+
+class Section {
+  constructor({ items, renderer }, containerSelector) {
+    this._renderedItems = items;
+    this._renderer = renderer;
+    this._container = document.querySelector(containerSelector);
+  }
+
+
+
+  addItem(element) {
+    this._container.prepend(element);
+  }
+
+
+  renderItems() {
+    this._renderedItems.forEach(item => {
+      this._renderer(item);
+    });
+  }
+}
+
+function generateCard(data) {
+  const card = new Card(data, '#card-template', openFullImage);
+  return card.createCard();
+}
+
+const defaultCardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    defaultCardList.addItem(generateCard(item));
+  }
+}, '.places__list');
+
+defaultCardList.renderItems();
+
 // Универсальные функции открытия и закрытия попапа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -88,15 +147,12 @@ function openFullImage(evt) {
 }
 
 // Создание функции для генерации карточек
-function generateCard(data) {
-  const card = new Card(data, '#card-template', openFullImage);
-  return card.createCard();
-}
+
 
 // Создание первоначальных карточек
-initialCards.forEach((evt) => {
-  places.append(generateCard(evt));
-});
+//initialCards.forEach((evt) => {
+//  places.append(generateCard(evt));
+//});
 
 // Обработчик «отправки» формы в окне редактирования
 function handleEditFormSubmit(evt) {
