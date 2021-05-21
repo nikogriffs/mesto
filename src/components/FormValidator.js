@@ -8,7 +8,7 @@ export class FormValidator {
 
   // 2. Включение метода валидации для конкретной формы
   enableValidation() {
-      this._setEventListeners();
+    this._setEventListeners();
   }
 
   // 3. Метод перебора всех полей ввода у формы, складываем их в массив, также находим кнопку,
