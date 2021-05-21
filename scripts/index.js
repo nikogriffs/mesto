@@ -1,114 +1,28 @@
 import { initialCards } from './initial-сards.js';
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
+import { UserInfo } from './UserInfo.js';
+import { Section } from './Section.js';
+import { PopupWithImage } from './PopupWithImage.js';
+import { PopupWithForm } from './PopupWithForm.js';
+import {
+  editButton, addButton, formEditElement, formAddElement, nameInput, jobInput,
+  placeInput, linkInput, configValidation
+} from './constants.js';
 
-// Находим необходимые элементы для дальнейшей работы в ДОМ
-const profile = document.querySelector('.profile');
-const popupEdit = document.querySelector('.popup-edit');
-const popupAdd = document.querySelector('.popup-add');
-const popupCard = document.querySelector('.popup-card');
-const popupImage = document.querySelector('.popup__image');
-const popupCaption = document.querySelector('.popup__caption');
-//const places = document.querySelector('.places__list');
-
-// Находим кнопки "Добавления", "Редактирования", "Закрытия"
-const editButton = profile.querySelector('.profile__edit-button');
-const addButton = profile.querySelector('.profile__add-button');
-const popupEditCloseButton = popupEdit.querySelector('.popup__close-button');
-const popupAddCloseButton = popupAdd.querySelector('.popup__close-button');
-const popupCardCloseButton = popupCard.querySelector('.popup__close-button');
-
-// Находим поля "Имя" и "О себе" на сайте
-const profileName = profile.querySelector('.profile__name');
-const profileJob = profile.querySelector('.profile__job');
-
-// Находим формы
-const formEditElement = popupEdit.querySelector('.popup__form');
-const formAddElement = popupAdd.querySelector('.popup__form');
-
-// Находим поля форм "Имя", "О себе", "Название", "Ссылка на картинку"
-const nameInput = formEditElement.querySelector('.popup__input_title_name');
-const jobInput = formEditElement.querySelector('.popup__input_title_job');
-const placeInput = formAddElement.querySelector('.popup__input_title_place');
-const linkInput = formAddElement.querySelector('.popup__input_title_link');
-
-// Конфиг валидации
-const configValidation = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  buttonSelector: '.popup__save-button',
-  disabledButtonClass: 'popup__save-button_disabled',
-  inputErrorClass: 'popup__input_title_error',
-  errorClass: 'popup__error_visible'
-}
-
-//Запускаем функции проверки валидации форм
+// Запускаем валидацию форм
 const formEditValidation = new FormValidator(configValidation, formEditElement);
 formEditValidation.enableValidation();
 const formAddValidation = new FormValidator(configValidation, formAddElement);
 formAddValidation.enableValidation();
 
-const escButton = 'Escape';
-
-class Popup {
-  constructor(popupSelector) {
-    this._popup = document.querySelector(popupSelector);
-  }
-
-  open() {
-    this._popup.classList.add('popup_opened');
-    document.addEventListener('keyup', this._handleEscClose);
-  }
-
-  close = () => {
-    this._popup.classList.remove('.popup_opened');
-    document.addEventListener('keyup', this._handleEscClose);
-  }
-
-  _handleEscClose(e) {
-    if(e.keyCode === 27)
-    this.close();
-  }
-
-  setEventListeners() {
-    this._popup.querySelector('.popup__close-button').addEL(() => {
-      this.close();
-    });
-  }
-}
-
-class PopupWithImage extends Popup {
-  constructor(popupSelector) {
-    this._popup = document.querySelector(popupSelector);
-  }
-}
-
-class Section {
-  constructor({ items, renderer }, containerSelector) {
-    this._renderedItems = items;
-    this._renderer = renderer;
-    this._container = document.querySelector(containerSelector);
-  }
-
-
-
-  addItem(element) {
-    this._container.prepend(element);
-  }
-
-
-  renderItems() {
-    this._renderedItems.forEach(item => {
-      this._renderer(item);
-    });
-  }
-}
-
+// Функция создания карточки
 function generateCard(data) {
-  const card = new Card(data, '#card-template', openFullImage);
+  const card = new Card(data, '#card-template', handleCardClick);
   return card.createCard();
 }
 
+// Рендерим начальные карточки
 const defaultCardList = new Section({
   items: initialCards,
   renderer: (item) => {
@@ -118,86 +32,47 @@ const defaultCardList = new Section({
 
 defaultCardList.renderItems();
 
-// Универсальные функции открытия и закрытия попапа
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupByEsc);
-  document.addEventListener('mousedown', closePopupOnOverlay);
+// Создаём экземпляры классов для работы с модальными окнами
+const userInfo = new UserInfo({ nameSelector: '.profile__name', jobSelector: '.profile__job' });
+const popupEditForm = new PopupWithForm('.popup-edit', handleEditFormSubmit);
+const popupAddForm = new PopupWithForm('.popup-add', handleAddFormSubmit);
+const popupFullImage = new PopupWithImage('.popup-card');
+
+// Функция клика по карточке
+function handleCardClick(evt) {
+  popupFullImage.open(evt);
+}
+popupFullImage.setEventListeners();
+
+// Функция редактирования профиля
+function handleEditFormSubmit() {
+  userInfo.setUserInfo(nameInput, jobInput);
+  popupEditForm.close();
 }
 
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupByEsc);
-  document.removeEventListener('mousedown', closePopupOnOverlay);
-}
-
-// Закрытие по оверлею
-function closePopupOnOverlay(evt) {
-  if (evt.target.classList.contains('popup_opened')) {
-    const popup = document.querySelector('.popup_opened');
-    closePopup(popup);
-  }
-}
-
-// Закрытие попапа на Escape
-function closePopupByEsc(evt) {
-  if (evt.key === escButton) {
-    const popup = document.querySelector('.popup_opened');
-    closePopup(popup);
-  }
-}
-
-// Функция попапа при клике на картинку
-function openFullImage(evt) {
-  popupCaption.textContent = evt.target.alt;
-  popupImage.src = evt.target.src;
-  popupImage.alt = evt.target.alt;
-  openPopup(popupCard);
-}
-
-// Создание функции для генерации карточек
-
-
-// Создание первоначальных карточек
-//initialCards.forEach((evt) => {
-//  places.append(generateCard(evt));
-//});
-
-// Обработчик «отправки» формы в окне редактирования
-function handleEditFormSubmit(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  closePopup(popupEdit);
-}
-
-// Обработчик «отправки» формы в окне добавления (функция добавление новых карточек)
-function handleAddFormSubmit(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы
+// Функция добавления карточки
+function handleAddFormSubmit() {
   const newCard = {
     name: placeInput.value,
     link: linkInput.value
   }
-  places.prepend(generateCard(newCard));
-  closePopup(popupAdd);
+  defaultCardList.addItem(generateCard(newCard));
+  popupAddForm.close();
 }
 
-//Слушатели клика по кнопке для открытия и закрытия попапов
+// Вешаем слушатель на кнопку редактирования профиля
 editButton.addEventListener('click', () => {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
-  openPopup(popupEdit);
+  nameInput.value = userInfo.getUserInfo().name;
+  jobInput.value = userInfo.getUserInfo().job;
   formEditValidation.clearErrorData();
+  popupEditForm.open();
 });
+popupEditForm.setEventListeners();
+
+// Вешаем слушатель на кнопку формы добавления
 addButton.addEventListener('click', () => {
   formAddElement.reset();
-  openPopup(popupAdd);
   formAddValidation.clearErrorData();
+  popupAddForm.open();
 });
-popupEditCloseButton.addEventListener('click', () => closePopup(popupEdit));
-popupAddCloseButton.addEventListener('click', () => closePopup(popupAdd));
-popupCardCloseButton.addEventListener('click', () => closePopup(popupCard));
-// Прикрепляем обработчик к формам:
-// он будет следить за событием “submit” - «отправка»
-formEditElement.addEventListener('submit', handleEditFormSubmit);
-formAddElement.addEventListener('submit', handleAddFormSubmit);
+popupAddForm.setEventListeners();
