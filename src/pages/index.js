@@ -1,14 +1,15 @@
-import { initialCards } from './initial-сards.js';
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
-import { UserInfo } from './UserInfo.js';
-import { Section } from './Section.js';
-import { PopupWithImage } from './PopupWithImage.js';
-import { PopupWithForm } from './PopupWithForm.js';
+import '../pages/index.css';
+import { initialCards } from '../utils/initial-сards.js';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { UserInfo } from '../components/UserInfo.js';
+import { Section } from '../components/Section.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
 import {
   editButton, addButton, formEditElement, formAddElement, nameInput, jobInput,
   placeInput, linkInput, configValidation
-} from './constants.js';
+} from '../utils/constants.js';
 
 // Запускаем валидацию форм
 const formEditValidation = new FormValidator(configValidation, formEditElement);

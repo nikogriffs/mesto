@@ -1,4 +1,4 @@
-import { escButton } from './constants.js';
+import { escButton } from '../utils/constants.js';
 
 export class Popup {
   constructor(popupSelector) {
