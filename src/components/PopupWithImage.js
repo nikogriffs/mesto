@@ -6,10 +6,10 @@ export class PopupWithImage extends Popup {
   }
 
   // Метод открытия попапа с картинкой
-  open = (evt) => {
-    this._popup.querySelector('.popup__caption').textContent = evt.target.alt;
-    this._popup.querySelector('.popup__image').src = evt.target.src;
-    this._popup.querySelector('.popup__image').alt = evt.target.alt;
+  open(name, link) {
+    this._popup.querySelector('.popup__caption').textContent = name;
+    this._popup.querySelector('.popup__image').src = link;
+    this._popup.querySelector('.popup__image').alt = name;
     super.open();
   }
 }

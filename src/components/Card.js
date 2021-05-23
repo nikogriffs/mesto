@@ -25,7 +25,9 @@ export class Card {
     this._element.querySelector('.places__trash-button').addEventListener('click', () => {
       this._handleDeleteCard();
     });
-    cardImage.addEventListener('click', this._clickImage);
+    cardImage.addEventListener('click', () => {
+      this._clickImage(this._name, this._link);
+    });
 
     return this._element;
   }

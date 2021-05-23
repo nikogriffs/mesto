@@ -40,8 +40,8 @@ const popupAddForm = new PopupWithForm('.popup-add', handleAddFormSubmit);
 const popupFullImage = new PopupWithImage('.popup-card');
 
 // Функция клика по карточке
-function handleCardClick(evt) {
-  popupFullImage.open(evt);
+function handleCardClick(name, link) {
+  popupFullImage.open(name, link);
 }
 popupFullImage.setEventListeners();
 
