@@ -1,7 +1,7 @@
 export class UserInfo {
   constructor({ nameSelector, jobSelector }) {
-    this._name = document.querySelector(nameSelector);
-    this._job = document.querySelector(jobSelector);
+    this._name = nameSelector;
+    this._job = jobSelector;
   }
 
   // Метод возвращает данные пользователя

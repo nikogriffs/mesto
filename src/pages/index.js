@@ -7,8 +7,9 @@ import { Section } from '../components/Section.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import {
-  editButton, addButton, formEditElement, formAddElement, nameInput, jobInput,
-  placeInput, linkInput, configValidation
+  places, editButton, addButton, formEditElement, formAddElement,
+  nameInput, jobInput, placeInput, linkInput, configValidation,
+  popupEdit, popupAdd, popupCard, profileName, profileJob
 } from '../utils/constants.js';
 
 // Запускаем валидацию форм
@@ -29,15 +30,15 @@ const defaultCardList = new Section({
   renderer: (item) => {
     defaultCardList.addItem(generateCard(item));
   }
-}, '.places__list');
+}, places);
 
 defaultCardList.renderItems();
 
 // Создаём экземпляры классов для работы с модальными окнами
-const userInfo = new UserInfo({ nameSelector: '.profile__name', jobSelector: '.profile__job' });
-const popupEditForm = new PopupWithForm('.popup-edit', handleEditFormSubmit);
-const popupAddForm = new PopupWithForm('.popup-add', handleAddFormSubmit);
-const popupFullImage = new PopupWithImage('.popup-card');
+const userInfo = new UserInfo({ nameSelector: profileName, jobSelector: profileJob });
+const popupEditForm = new PopupWithForm(popupEdit, handleEditFormSubmit);
+const popupAddForm = new PopupWithForm(popupAdd, handleAddFormSubmit);
+const popupFullImage = new PopupWithImage(popupCard);
 
 // Функция клика по карточке
 function handleCardClick(name, link) {

@@ -1,8 +1,13 @@
+export const places = document.querySelector('.places__list');
 // Находим находим элементы модальных окон форм редактирования и добавления
 export const popupEdit = document.querySelector('.popup-edit');
 export const popupAdd = document.querySelector('.popup-add');
+export const popupCard = document.querySelector('.popup-card');
 
 // Находим кнопки "Добавления" и "Редактирования"
+export const profileName = document.querySelector('.profile__name');
+export const profileJob = document.querySelector('.profile__job');
+
 export const editButton = document.querySelector('.profile__edit-button');
 export const addButton = document.querySelector('.profile__add-button');
 
