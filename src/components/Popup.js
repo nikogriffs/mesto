@@ -35,8 +35,10 @@ export class Popup {
 
   // Метод закрытия по иконке закрытия
   setEventListeners() {
-    this._popup.querySelector('.popup__close-button').addEventListener('click', () => {
-      this.close();
+    this._popup.addEventListener('click', (evt) => {
+      if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close-button')) {
+        this.close();
+      }
     });
   }
 }
