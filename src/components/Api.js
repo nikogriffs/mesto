@@ -17,8 +17,6 @@ export class Api {
       });
   }
 
-
-
   getUserInfo() {
     return fetch(`${this._address}/users/me`, {
       headers: this._headers
@@ -37,6 +35,21 @@ export class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({ name: name, about: job })
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        // если ошибка, отклоняем промис
+        return Promise.reject(`Ошибка: ${res.status}`);
+      });
+  }
+
+  createCard(name, link) {
+    return fetch(`${this._address}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({ name: name, link: link })
     })
       .then(res => {
         if (res.ok) {

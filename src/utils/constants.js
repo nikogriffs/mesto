@@ -7,6 +7,7 @@ export const popupCard = document.querySelector('.popup-card');
 // Находим кнопки "Добавления" и "Редактирования"
 export const profileName = document.querySelector('.profile__name');
 export const profileJob = document.querySelector('.profile__job');
+export const profileAvatar = document.querySelector('.profile__avatar');
 
 export const editButton = document.querySelector('.profile__edit-button');
 export const addButton = document.querySelector('.profile__add-button');

@@ -7,7 +7,7 @@ export class Section {
 
   // Метод отрисовки карточки
   addItem(element) {
-    this._container.prepend(element);
+    this._container.append(element);
   }
 
   // Метод отрисовки всех элементов

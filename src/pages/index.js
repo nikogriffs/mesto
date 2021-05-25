@@ -10,7 +10,7 @@ import { Api } from '../components/Api.js';
 import {
   places, editButton, addButton, formEditElement, formAddElement,
   nameInput, jobInput, placeInput, linkInput, configValidation,
-  popupEdit, popupAdd, popupCard, profileName, profileJob
+  popupEdit, popupAdd, popupCard, profileName, profileJob, profileAvatar
 } from '../utils/constants.js';
 
 const api = new Api({
@@ -21,11 +21,13 @@ const api = new Api({
   }
 });
 
+let defaultCardList = null;
+
 // Рендерим начальные карточки
 api.getInitialCards()
   .then((result) => {
     console.log(result);
-    const defaultCardList = new Section({
+    defaultCardList = new Section({
       items: result,
       renderer: (item) => {
         defaultCardList.addItem(generateCard(item));
@@ -37,9 +39,6 @@ api.getInitialCards()
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
   });
-
-
-
 
 // Запускаем валидацию форм
 const formEditValidation = new FormValidator(configValidation, formEditElement);
@@ -53,25 +52,20 @@ function generateCard(data) {
   return card.createCard();
 }
 
-
-
-
 // Создаём экземпляры классов для работы с модальными окнами
-const userInfo = new UserInfo({ nameSelector: profileName, jobSelector: profileJob });
+const userInfo = new UserInfo({ nameSelector: profileName, jobSelector: profileJob, avatarSelector: profileAvatar });
 const popupEditForm = new PopupWithForm(popupEdit, handleEditFormSubmit);
 const popupAddForm = new PopupWithForm(popupAdd, handleAddFormSubmit);
 const popupFullImage = new PopupWithImage(popupCard);
 
 api.getUserInfo()
   .then((result) => {
-    console.log(result);
-    userInfo.setUserInfo(result.name, result.about);
+    console.log(result.avatar);
+    userInfo.setUserInfo(result.name, result.about, result.avatar);
   })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
   });
-
-
 
 // Функция клика по карточке
 function handleCardClick(name, link) {
@@ -80,28 +74,29 @@ function handleCardClick(name, link) {
 popupFullImage.setEventListeners();
 
 
-
-
 // Функция редактирования профиля
 function handleEditFormSubmit() {
   api.setUserInfo(nameInput.value, jobInput.value)
-  .then((result) => {
-    console.log(result);
-    userInfo.setUserInfo(result.name, result.about);
-  })
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
+    .then((result) => {
+      console.log(result);
+      userInfo.setUserInfo(result.name, result.about, result.avatar);
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
   popupEditForm.close();
 }
 
 // Функция добавления карточки
 function handleAddFormSubmit() {
-  const newCard = {
-    name: placeInput.value,
-    link: linkInput.value
-  }
-  defaultCardList.addItem(generateCard(newCard));
+  api.createCard(placeInput.value, linkInput.value)
+    .then((result) => {
+      console.log(result);
+      defaultCardList.addItem(generateCard(result));
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    })
   popupAddForm.close();
 }
 
