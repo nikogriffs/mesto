@@ -14,7 +14,7 @@ export class UserInfo {
 
   // Метод принимает новые данные пользователя
   setUserInfo(nameInput, jobInput) {
-    this._name.textContent = nameInput.value;
-    this._job.textContent = jobInput.value;
+    this._name.textContent = nameInput;
+    this._job.textContent = jobInput;
   }
 }
