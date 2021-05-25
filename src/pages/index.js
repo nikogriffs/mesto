@@ -49,6 +49,7 @@ formAddValidation.enableValidation();
 // Функция создания карточки
 function generateCard(data) {
   const card = new Card(data, '#card-template', handleCardClick);
+
   return card.createCard();
 }
 

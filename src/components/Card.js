@@ -3,7 +3,9 @@ export class Card {
     this._cardSelector = cardSelector;
     this._name = data.name;
     this._link = data.link;
+    this._likes = data.likes;
     this._clickImage = handleCardClick;
+
   }
 
   _getTemplate() {
@@ -14,6 +16,7 @@ export class Card {
   // Метод создания первоначальных карточек из готового массива и заготовки (template)
   createCard() {
     this._element = this._getTemplate();
+    this._counterLikeCard = this._element.querySelector('.places__like-counter');
     const cardImage = this._element.querySelector('.places__image');
 
     this._element.querySelector('.places__title').textContent = this._name;
@@ -29,6 +32,7 @@ export class Card {
       this._clickImage(this._name, this._link);
     });
 
+    this._counterLikeCard.textContent = this._likes.length;
     return this._element;
   }
 
