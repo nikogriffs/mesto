@@ -53,34 +53,49 @@ formAddValidation.enableValidation();
 
 // Функция создания карточки
 function generateCard(data) {
+  console.log(data);
+  console.log('fuck1');
   const myId = userInfo.getUserInfo().id;
-  const card = new Card(data, myId, '#card-template', handleCardClick, handleLikeClick, handleDeleteClick);
+  const card = new Card(data, myId, '#card-template', {
+
+    handleCardClick: (name, link) => {
+      popupFullImage.open(name, link);
+    },
+
+    handleLikeClick: (evt, places) => {
+      const buttonLike = places.querySelector('.places__like-button');
+      const counterLike = places.querySelector('.places__like-counter');
+      if (!buttonLike.classList.contains('places__like-button_active')) {
+        api.setLike(evt)
+          .then((result) => {
+            counterLike.textContent = result.likes.length;
+          })
+          .catch((err) => {
+            console.log(err); // выведем ошибку в консоль
+          });
+      } else {
+        api.delLike(evt)
+          .then((result) => {
+            counterLike.textContent = result.likes.length;
+          })
+          .catch((err) => {
+            console.log(err); // выведем ошибку в консоль
+          });
+      }
+    },
+
+    handleDeleteClick: (data) => {
+      console.log(data);
+      console.log('fuck2');
+      popupDeleteForm.open(handleDeleteFormSubmit);
+    }
+  });
   return card.createCard();
 }
 
+// function handleDeleteClick(evt, element) {
 
-function handleLikeClick(evt, places) {
-
-  const buttonLike = places.querySelector('.places__like-button');
-  const counterLike = places.querySelector('.places__like-counter');
-  if (!buttonLike.classList.contains('places__like-button_active')) {
-    api.setLike(evt)
-      .then((result) => {
-        counterLike.textContent = result.likes.length;
-      })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      });
-  } else {
-    api.delLike(evt)
-      .then((result) => {
-        counterLike.textContent = result.likes.length;
-      })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      });
-  }
-}
+// }
 
 
 
@@ -89,7 +104,7 @@ const userInfo = new UserInfo({ nameSelector: profileName, jobSelector: profileJ
 const popupEditForm = new PopupWithForm(popupEdit, handleEditFormSubmit);
 const popupAddForm = new PopupWithForm(popupAdd, handleAddFormSubmit);
 const popupFullImage = new PopupWithImage(popupCard);
-const popupDeleteForm = new PopupWithDeleteBtn(popupDelete, handleDeleteFormSubmit);
+const popupDeleteForm = new PopupWithDeleteBtn(popupDelete);
 
 api.getUserInfo()
   .then((result) => {
@@ -101,9 +116,7 @@ api.getUserInfo()
   });
 
 // Функция клика по карточке
-function handleCardClick(name, link) {
-  popupFullImage.open(name, link);
-}
+
 popupFullImage.setEventListeners();
 
 function handleDeleteFormSubmit(evt) {
@@ -118,11 +131,7 @@ function handleDeleteFormSubmit(evt) {
 
 }
 
-function handleDeleteClick(evt, element) {
-  popupDeleteForm.open(evt);
 
-  // return element;
-}
 popupDeleteForm.setEventListeners();
 
 // console.log(element);

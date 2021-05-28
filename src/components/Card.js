@@ -1,5 +1,5 @@
 export class Card {
-  constructor(data, myId, cardSelector, handleCardClick, handleLikeClick, handleDeleteClick) {
+  constructor(data, myId, cardSelector, { handleCardClick, handleLikeClick, handleDeleteClick }) {
     this._cardSelector = cardSelector;
     this._name = data.name;
     this._link = data.link;
@@ -45,7 +45,7 @@ export class Card {
     this._element.querySelector('.places__like-button').addEventListener('click', this._handleLikeCard);
 
     this._element.querySelector('.places__trash-button').addEventListener('click', () => {
-      this._clickDelete(this._cardId, this._element);
+      this._clickDelete(this._cardId);
     });
 
     this._cardImage.addEventListener('click', () => {
