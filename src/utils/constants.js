@@ -3,6 +3,7 @@ export const places = document.querySelector('.places__list');
 export const popupEdit = document.querySelector('.popup-edit');
 export const popupAdd = document.querySelector('.popup-add');
 export const popupCard = document.querySelector('.popup-card');
+export const popupDelete = document.querySelector('.popup-delete');
 
 // Находим кнопки "Добавления" и "Редактирования"
 export const profileName = document.querySelector('.profile__name');
@@ -11,6 +12,7 @@ export const profileAvatar = document.querySelector('.profile__avatar');
 
 export const editButton = document.querySelector('.profile__edit-button');
 export const addButton = document.querySelector('.profile__add-button');
+export const delButton = document.querySelector('.places__trash-button');
 
 // Находим формы
 export const formEditElement = popupEdit.querySelector('.popup__form');

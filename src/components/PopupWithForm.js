@@ -10,7 +10,7 @@ export class PopupWithForm extends Popup {
   // Метод для сбора данных с полей
   _getInputValues() {
     const values = {}
-
+console.log(values);
     const inputs = [...this._form.querySelectorAll('.popup__input')];
     inputs.forEach(input => {
       values[input.name] = input.value;
@@ -25,11 +25,5 @@ export class PopupWithForm extends Popup {
       evt.preventDefault();
       this._submitHandler(this._getInputValues());
     });
-  }
-
-  // метод закрытия попапа и очистка формы
-  close() {
-    this._form.reset();
-    super.close();
   }
 }
