@@ -12,7 +12,6 @@ export class PopupWithForm extends Popup {
   // Метод для сбора данных с полей
   _getInputValues() {
     const values = {}
-    console.log(values);
     const inputs = [...this._form.querySelectorAll('.popup__input')];
     inputs.forEach(input => {
       values[input.name] = input.value;
@@ -35,7 +34,6 @@ export class PopupWithForm extends Popup {
       this._button.textContent = 'Сохранение...';
     } else {
       this._button.textContent = this._originalBtnText;
-      console.log(this._button.textContent);
     }
   }
 }

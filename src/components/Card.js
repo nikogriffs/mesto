@@ -33,9 +33,8 @@ export class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
 
-
     // Вешаем слушателей на элементы карточек из массива
-    this._element.querySelector('.places__like-button').addEventListener('click', () => {
+    this._buttonLike.addEventListener('click', () => {
       // Выбор метода, если лайк поставлен
       if (this._buttonLike.classList.contains('places__like-button_active')) {
         this._handleDeleteLike();
@@ -83,7 +82,6 @@ export class Card {
   // Если карточка не моя, иконка корзины исчезает
   _checkMyCard() {
     if (this._myId !== this._owner) {
-
       this._deleteButton.style.display = 'none';
     }
   }

@@ -1,12 +1,12 @@
 export const places = document.querySelector('.places__list');
-// Находим находим элементы модальных окон форм редактирования и добавления
+// Находим находим элементы модальных окон форм
 export const popupEdit = document.querySelector('.popup-edit');
 export const popupAdd = document.querySelector('.popup-add');
 export const popupCard = document.querySelector('.popup-card');
 export const popupDelete = document.querySelector('.popup-delete');
 export const popupAvatar = document.querySelector('.popup-avatar');
 
-// Находим кнопки "Добавления" и "Редактирования"
+// Находим кнопки форм
 export const profileName = document.querySelector('.profile__name');
 export const profileJob = document.querySelector('.profile__job');
 export const profileAvatar = document.querySelector('.profile__avatar');
@@ -21,7 +21,7 @@ export const formEditElement = popupEdit.querySelector('.popup__form');
 export const formAddElement = popupAdd.querySelector('.popup__form');
 export const formAvatarElement = popupAvatar.querySelector('.popup__form');
 
-// Находим поля форм "Имя", "О себе", "Название", "Ссылка на картинку"
+// Находим поля форм
 export const nameInput = formEditElement.querySelector('.popup__input_title_name');
 export const jobInput = formEditElement.querySelector('.popup__input_title_job');
 export const placeInput = formAddElement.querySelector('.popup__input_title_place');

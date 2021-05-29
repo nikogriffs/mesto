@@ -5,13 +5,13 @@ import { UserInfo } from '../components/UserInfo.js';
 import { Section } from '../components/Section.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithDeleteBtn } from '../components/PopupWithDeleteBtn';
 import { Api } from '../components/Api.js';
 import {
   places, editButton, addButton, avatarButton, formEditElement, formAddElement, formAvatarElement,
   nameInput, jobInput, placeInput, linkInput, avatarInput, configValidation,
   popupEdit, popupAdd, popupCard, popupDelete, popupAvatar, profileName, profileJob, profileAvatar
 } from '../utils/constants.js';
-import { PopupWithDeleteBtn } from '../components/PopupWithDeleteBtn';
 
 // Экземпляр класса Api
 const api = new Api({
@@ -43,7 +43,6 @@ const formAddValidation = new FormValidator(configValidation, formAddElement);
 formAddValidation.enableValidation();
 const formAvatarValidation = new FormValidator(configValidation, formAvatarElement);
 formAvatarValidation.enableValidation();
-
 
 // Функция создания карточки
 function generateCard(data) {
