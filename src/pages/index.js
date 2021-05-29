@@ -147,7 +147,6 @@ function handleAvatarFormSubmit() {
   popupAvatarForm.renderLoading(true);
   api.updateAvatar(avatarInput.value)
     .then((result) => {
-      console.log(result.avatar);
       userInfo.setUserInfo(result.name, result.about, result.avatar, result._id);
     })
     .catch((err) => {
