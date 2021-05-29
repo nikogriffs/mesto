@@ -43,7 +43,7 @@ export class Card {
       }
     });
 
-    this._element.querySelector('.places__trash-button').addEventListener('click', () => {
+    this._deleteButton.addEventListener('click', () => {
       this._clickDelete(this._cardId);
     });
 
