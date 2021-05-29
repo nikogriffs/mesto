@@ -3,8 +3,6 @@ import { escButton } from '../utils/constants.js';
 export class Popup {
   constructor(popupSelector) {
     this._popup = popupSelector;
-
-
   }
 
   // Метод открытия попапа
@@ -20,8 +18,6 @@ export class Popup {
     document.removeEventListener('keydown', this._handleEscClose);
     document.removeEventListener('mousedown', this._closePopupOnOverlay);
   }
-
-
 
   //Метод выхода по Escape
   _handleEscClose = (evt) => {

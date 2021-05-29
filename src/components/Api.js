@@ -1,120 +1,107 @@
 export class Api {
   constructor(options) {
     this._address = options.baseUrl;
-    this._headers = options.headers;
+    this._token = options.headers.authorization;
   }
 
+  // Метод проверки ответа от сервера
+  _checkAnswer(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    // если ошибка, отклоняем промис
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
+
+  // Метод получения начальных карточек
   getInitialCards() {
     return fetch(`${this._address}/cards`, {
-      headers: this._headers
+      headers: {
+        authorization: this._token
+      }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkAnswer)
   }
 
+  // Метод получения информации о пользователе с сервера
   getUserInfo() {
     return fetch(`${this._address}/users/me`, {
-      headers: this._headers
+      headers: {
+        authorization: this._token
+      }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkAnswer)
   }
 
+  // Метод отправки инфоормации о пользователе на сервер
   setUserInfo(name, job) {
     return fetch(`${this._address}/users/me`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ name: name, about: job })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkAnswer)
   }
 
+  // Метод создания карточки на сервере
   createCard(name, link) {
     return fetch(`${this._address}/cards`, {
       method: 'POST',
-      headers: this._headers,
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ name: name, link: link })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkAnswer)
   }
 
+  // Метод отправки лайка на сервер
   setLike(cardId) {
     return fetch(`${this._address}/cards/likes/${cardId}`, {
       method: 'PUT',
-      headers: this._headers,
+      headers: {
+        authorization: this._token
+      }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkAnswer)
   }
 
+  // Метод удаления лайка с сервера
   delLike(cardId) {
     return fetch(`${this._address}/cards/likes/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: {
+        authorization: this._token
+      }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkAnswer)
   }
 
+  // Метод удаления карточки с сервера
   delCard(cardId) {
     return fetch(`${this._address}/cards/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: {
+        authorization: this._token
+      }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkAnswer)
   }
 
+  // Метод обновления аватара на сервере
   updateAvatar(avatar) {
     return fetch(`${this._address}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ avatar: avatar })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._checkAnswer)
   }
-
 }

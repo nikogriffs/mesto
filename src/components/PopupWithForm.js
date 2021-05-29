@@ -29,6 +29,7 @@ export class PopupWithForm extends Popup {
     });
   }
 
+  // Метод отрисовки UX при отправке формы
   renderLoading(isLoading) {
     if (isLoading) {
       this._button.textContent = 'Сохранение...';
@@ -36,7 +37,6 @@ export class PopupWithForm extends Popup {
       this._button.textContent = this._originalBtnText;
       console.log(this._button.textContent);
     }
-
   }
 }
 
