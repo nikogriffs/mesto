@@ -5,12 +5,14 @@ export class PopupWithForm extends Popup {
     super(popupSelector);
     this._submitHandler = submitHandler;
     this._form = this._popup.querySelector('.popup__form');
+    this._button = this._popup.querySelector('.popup__save-button');
+    this._originalBtnText = this._button.textContent;
   }
 
   // Метод для сбора данных с полей
   _getInputValues() {
     const values = {}
-console.log(values);
+    console.log(values);
     const inputs = [...this._form.querySelectorAll('.popup__input')];
     inputs.forEach(input => {
       values[input.name] = input.value;
@@ -26,4 +28,16 @@ console.log(values);
       this._submitHandler(this._getInputValues());
     });
   }
+
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this._button.textContent = 'Сохранение...';
+    } else {
+      this._button.textContent = this._originalBtnText;
+      console.log(this._button.textContent);
+    }
+
+  }
 }
+
+

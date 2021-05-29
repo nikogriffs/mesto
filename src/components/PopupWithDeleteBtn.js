@@ -3,7 +3,6 @@ import { Popup } from './Popup.js';
 export class PopupWithDeleteBtn extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
-    this._submitHandler = submitHandler;
     this._form = this._popup.querySelector('.popup__form');
   }
 
@@ -16,12 +15,10 @@ export class PopupWithDeleteBtn extends Popup {
     });
   }
 
-
-
-
-open(cardId) {
+open(cardId, submitHandler) {
   super.open();
   this._cardId = cardId;
+  this._submitHandler = submitHandler;
 }
 
 }

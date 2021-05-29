@@ -3,7 +3,6 @@ export class UserInfo {
     this._name = nameSelector;
     this._job = jobSelector;
     this._avatar = avatarSelector;
-    // this._myId = myId;
   }
 
   // Метод возвращает данные пользователя
@@ -23,8 +22,4 @@ export class UserInfo {
     this._avatar.src = avatarImage;
     this._myId = myId;
   }
-
-  // getMyId() {
-  //   return this._myId;
-  // }
 }

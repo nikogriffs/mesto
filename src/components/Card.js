@@ -33,7 +33,6 @@ export class Card {
     }
 
     if (!(this._myId === this._owner._id)) {
-      // this._deleteButton.style.display = 'none';
       this._deleteButton.style.display = 'none';
     }
 
@@ -64,7 +63,7 @@ export class Card {
   }
 
   // Метод для удаления карточки
-  _deleteCard() {
+  deleteCard() {
     this._element.remove();
     this._element = null;
   }
