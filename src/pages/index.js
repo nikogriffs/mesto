@@ -86,7 +86,9 @@ function generateCard(data) {
       popupDeleteForm.open(() => {
         // Метод удаления карточки с сервера
         api.delCard(cardId)
-          .then(card.deleteCard())
+          .then(() => {
+            card.deleteCard();
+          })
           .catch((err) => {
             console.log(err); // выведем ошибку в консоль
           });
