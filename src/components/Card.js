@@ -35,11 +35,11 @@ export class Card {
 
     // Вешаем слушателей на элементы карточек из массива
     this._buttonLike.addEventListener('click', () => {
-      // Выбор метода, если лайк поставлен
+      // Либо метод установки лайка, либо метод удаления лайка
       if (this._buttonLike.classList.contains('places__like-button_active')) {
-        this._handleDeleteLike();
+        this._deleteLike(this._cardId);
       } else {
-        this._handleSetLike();
+        this._setLike(this._cardId);
       }
     });
 
@@ -58,15 +58,8 @@ export class Card {
     return this._element;
   }
 
-  // Метод установки лайка
-  _handleSetLike() {
-    this._setLike(this._cardId);
-    this._buttonLike.classList.toggle('places__like-button_active');
-  }
-
-  // Метод удаления лайка
-  _handleDeleteLike() {
-    this._deleteLike(this._cardId);
+  // Метод отрисовки лайка
+  toggleLike() {
     this._buttonLike.classList.toggle('places__like-button_active');
   }
 

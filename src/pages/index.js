@@ -60,6 +60,9 @@ function generateCard(data) {
         .then((result) => {
           card.updateLike(result);
         })
+        .then(() => {
+          card.toggleLike();
+        })
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
         });
@@ -70,6 +73,9 @@ function generateCard(data) {
       api.delLike(cardId)
         .then((result) => {
           card.updateLike(result);
+        })
+        .then(() => {
+          card.toggleLike();
         })
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
