@@ -88,6 +88,7 @@ function generateCard(data) {
         api.delCard(cardId)
           .then(() => {
             card.deleteCard();
+            popupDeleteForm.close();
           })
           .catch((err) => {
             console.log(err); // выведем ошибку в консоль
@@ -123,6 +124,7 @@ function handleEditFormSubmit() {
   api.setUserInfo(nameInput.value, jobInput.value)
     .then((result) => {
       userInfo.setUserInfo(result.name, result.about, result.avatar, result._id);
+      popupEditForm.close();
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
@@ -130,7 +132,6 @@ function handleEditFormSubmit() {
     .finally(() => {
       popupEditForm.renderLoading(false);
     })
-  popupEditForm.close();
 }
 
 // Функция добавления карточки
@@ -140,6 +141,7 @@ function handleAddFormSubmit() {
   api.createCard(placeInput.value, linkInput.value)
     .then((result) => {
       places.prepend(generateCard(result));
+      popupAddForm.close();
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
@@ -147,7 +149,6 @@ function handleAddFormSubmit() {
     .finally(() => {
       popupAddForm.renderLoading(false);
     })
-  popupAddForm.close();
 }
 
 // Функция обновления аватара
@@ -156,6 +157,7 @@ function handleAvatarFormSubmit() {
   api.updateAvatar(avatarInput.value)
     .then((result) => {
       userInfo.setUserInfo(result.name, result.about, result.avatar, result._id);
+      popupAvatarForm.close();
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
@@ -163,7 +165,6 @@ function handleAvatarFormSubmit() {
     .finally(() => {
       popupAvatarForm.renderLoading(false);
     })
-  popupAvatarForm.close();
 }
 
 // Вешаем слушатель на кнопку обновления аватара
