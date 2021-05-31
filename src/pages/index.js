@@ -21,16 +21,16 @@ const api = new Api({
   }
 });
 
-// Рендерим начальные карточки с сервера
-api.getInitialCards()
-  .then((result) => {
-    const defaultCardList = new Section({
-      items: result,
-      renderer: (item) => {
-        defaultCardList.addItem(generateCard(item));
-      }
-    }, places)
-    defaultCardList.renderItems();
+// Экземпляр класса Section
+const cardSection = new Section((item) => {
+    cardSection.addItem(generateCard(item), 'append');
+  }, places)
+
+// Получаем информацию о пользователе и начальные карточки с сервера
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([user, cards]) => {
+    userInfo.setUserInfo(user.name, user.about, user.avatar, user._id);
+    cardSection.renderItems(cards);
   })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
@@ -108,15 +108,6 @@ const popupAvatarForm = new PopupWithForm(popupAvatar, handleAvatarFormSubmit);
 const popupFullImage = new PopupWithImage(popupCard);
 const popupDeleteForm = new PopupWithDeleteBtn(popupDelete);
 
-// Метод получения информации о пользователе с сервера
-api.getUserInfo()
-  .then((result) => {
-    userInfo.setUserInfo(result.name, result.about, result.avatar, result._id);
-  })
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
-
 // Функция редактирования профиля
 function handleEditFormSubmit() {
   // Метод отправки данных о пользователе на сервер
@@ -140,7 +131,7 @@ function handleAddFormSubmit() {
   popupAddForm.renderLoading(true);
   api.createCard(placeInput.value, linkInput.value)
     .then((result) => {
-      places.prepend(generateCard(result));
+      cardSection.addItem(generateCard(result), 'prepend');
       popupAddForm.close();
     })
     .catch((err) => {
