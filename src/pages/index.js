@@ -59,8 +59,6 @@ function generateCard(data) {
       api.setLike(cardId)
         .then((result) => {
           card.updateLike(result);
-        })
-        .then(() => {
           card.toggleLike();
         })
         .catch((err) => {
@@ -73,8 +71,6 @@ function generateCard(data) {
       api.delLike(cardId)
         .then((result) => {
           card.updateLike(result);
-        })
-        .then(() => {
           card.toggleLike();
         })
         .catch((err) => {
