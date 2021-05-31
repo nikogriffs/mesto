@@ -23,8 +23,8 @@ const api = new Api({
 
 // Экземпляр класса Section
 const cardSection = new Section((item) => {
-    cardSection.addItem(generateCard(item), 'append');
-  }, places)
+  cardSection.addItem(generateCard(item), 'append');
+}, places)
 
 // Получаем информацию о пользователе и начальные карточки с сервера
 Promise.all([api.getUserInfo(), api.getInitialCards()])
